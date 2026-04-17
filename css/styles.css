@@ -1,0 +1,182 @@
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "timesdot", serif;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(80, 131, 84, 0);
+  color: #60ccfc;
+}
+
+.headermiguel {
+  display: grid;
+  grid-template: repeat(2,1fr) / repeat(11,1fr);
+  text-align: center;
+  position: sticky;
+  top: 0;
+  padding-top: 10px;
+  align-items: center;
+  z-index: 1000;
+  margin-bottom: 5px;
+  background-color: white;
+}
+
+.headermiguel div, .headermiguel a, .switch-view div {
+  text-decoration-thickness: 0.75px;
+  text-underline-offset: 2px;
+}
+
+
+.headermiguel.info-mode .nombremiguel {
+  background: repeating-linear-gradient(
+    180deg,
+    #5fd7fc 0px,
+    #ffffff 2px,
+    #88d3ff 4px,
+    #ffffff 4px,
+    #95d9fa 6px,
+    #ffffff 6px,
+    #7fd4fe 8px,
+    #7dd6fe 8px,
+    #60ccfc 9px
+  );
+}
+
+.nombremiguel {
+  grid-area: 1 / 5 / 2 / 8;
+  gap: 6px;
+}
+
+.infor, .homer {
+  grid-area: 2 / 8 / 3 / 9;
+  font-size: 15px;
+  text-align: left;
+  padding-left: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.indexview {
+  grid-area: 2 / 4 / 3 / 5;
+  font-size: 15px;
+  text-align: right;
+  padding-right: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+  color: black;
+}
+
+.info {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 26%;
+  text-align: center;
+  transition: opacity 0.3s ease;
+  z-index: 1001;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(11,1fr);
+}
+
+.center {
+  grid-column: 5/8;
+  text-align: center;
+}
+
+.proyectomiguel img {
+  width: 100%;
+}
+
+.proyectos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.clients-list {
+  padding: 5px 0 0;
+  margin: 0;
+  list-style: none;
+}
+
+@font-face {
+  font-family: "timesdot";
+  src: url("/fonts/timesdotrom-webfont_3.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media (max-width: 768px) {
+
+  .headermiguel {
+    grid-template: repeat(2,auto) / repeat(12,1fr);
+  }
+
+  .nombremiguel {
+    grid-column: 4 / 10;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .indexview {
+    grid-area: 2 / 1 / 3 / 3;
+    font-size: 13px;
+    text-align: right;
+    padding-right: 5px;
+  }
+
+  .infor, .homer {
+    grid-area: 2 / 11 / 3 / 13;
+    font-size: 13px;
+    text-align: left;
+    padding-left: 5px;
+  }
+
+  .content {
+    grid-template-columns: repeat(12,1fr);
+  }
+
+  .center {
+    grid-column: 3 / 11;
+    text-align: center;
+  }
+
+  .proyectomiguel img {
+    width: 100%;
+    height: auto;
+  }
+
+  .info {
+    width: 60%;
+    font-size: 13px;
+    margin: 0 auto;
+    padding: 10px 0;
+  }
+
+  .clients-list li {
+    font-size: 13px;
+  }
+}
