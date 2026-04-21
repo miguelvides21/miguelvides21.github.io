@@ -20,6 +20,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  background-color: #fffff5;
 }
 
 ::selection {
@@ -37,7 +38,7 @@ body {
   align-items: center;
   z-index: 1000;
   margin-bottom: 5px;
-  background-color: white;
+  background-color: #fffff5;
 }
 
 .headermiguel div, .headermiguel a, .switch-view div {

@@ -34,7 +34,7 @@ body::-webkit-scrollbar {
   align-items: center;
   z-index: 1000;
   margin-bottom: 5px;
-  background-color: white;
+  background-color: #fffff5;
 }
 
 .headermiguel div,
