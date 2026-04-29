@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   homeBtn.style.display = "none";
   info.style.display = "none";
 
+  // INFO MODE
   infoBtn.onclick = () => {
     info.style.display = "block";
     projects.style.display = "none";
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     header.classList.add("info-mode");
   };
 
+  // HOME MODE
   homeBtn.onclick = () => {
     info.style.display = "none";
     projects.style.display = "flex";
@@ -25,21 +27,36 @@ document.addEventListener('DOMContentLoaded', () => {
     header.classList.remove("info-mode");
   };
 
-  // LIGHTBOX (lo puedes dejar igual)
+  // LIGHTBOX
+  const lightboxOverlay = document.createElement('div');
+  lightboxOverlay.classList.add('lightbox-overlay');
+
   const lightbox = document.createElement('img');
   lightbox.classList.add('lightbox-img');
-  document.body.appendChild(lightbox);
+
+  lightboxOverlay.appendChild(lightbox);
+  document.body.appendChild(lightboxOverlay);
 
   const thumbs = document.querySelectorAll('.thumb-container .media-thumb');
+
   thumbs.forEach(img => {
     img.addEventListener('click', () => {
       lightbox.src = img.src;
-      lightbox.style.display = 'block';
+      lightboxOverlay.classList.add('active');
     });
   });
 
+  // Cerrar al clicar fuera de la imagen
+  lightboxOverlay.addEventListener('click', (e) => {
+    if (e.target === lightboxOverlay) {
+      lightboxOverlay.classList.remove('active');
+      lightbox.src = '';
+    }
+  });
+
+  // Opcional: cerrar también clicando la imagen
   lightbox.addEventListener('click', () => {
-    lightbox.style.display = 'none';
+    lightboxOverlay.classList.remove('active');
     lightbox.src = '';
   });
 
