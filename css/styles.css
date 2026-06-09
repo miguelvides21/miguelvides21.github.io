@@ -85,6 +85,15 @@ body {
   text-decoration: underline;
   color: black;
 }
+.project-hover {
+  grid-column: 5/ 8;  /* misma columna que info */
+  grid-row: 2;          /* debajo del info */
+  font-size: 15px;
+  text-align: center;
+  padding-left: 10px;
+  min-height: 20px;
+  color: #60ccfc
+}
 
 .info {
   position: fixed;

@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const projects = document.getElementById("projectsSection");
   const header = document.querySelector(".headermiguel");
 
+  // 👉 NUEVO: texto hover debajo de info
+  const hoverText = document.getElementById("projectHover");
+
   let loopActive = true;
   let isJumping = false;
   let blockHeight = 0;
@@ -27,9 +30,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const scrollTop = document.documentElement.scrollTop;
 
     if (scrollTop >= blockHeight * 2) {
-      jump(blockHeight); // salto al centro
+      jump(blockHeight);
     } else if (scrollTop <= 0) {
-      jump(blockHeight * 2); // salto al centro
+      jump(blockHeight * 2);
     }
   }
 
@@ -47,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // Optimización con requestAnimationFrame
+  // Optimización scroll
   let ticking = false;
   window.addEventListener("scroll", () => {
     if (!ticking) {
@@ -80,26 +83,43 @@ document.addEventListener("DOMContentLoaded", function() {
     infoBtn.style.display = "inline-block";
     header.classList.remove("info-mode");
 
-    // reset scroll al centro
     window.scrollTo({ top: blockHeight, behavior: "instant" });
   };
 
-  // === Lightbox simple ===
-  const lightbox = document.createElement('img');
-  lightbox.classList.add('lightbox-img');
-  lightbox.style.display = "none"; // evitar flash inicial
+  // === LIGHTBOX ===
+  const lightbox = document.createElement("img");
+  lightbox.classList.add("lightbox-img");
+  lightbox.style.display = "none";
   document.body.appendChild(lightbox);
 
-  const thumbs = document.querySelectorAll('.media-thumb');
+  const thumbs = document.querySelectorAll(".media-thumb");
   thumbs.forEach(img => {
-    img.addEventListener('click', () => {
+    img.addEventListener("click", () => {
       lightbox.src = img.src;
-      lightbox.style.display = 'block';
+      lightbox.style.display = "block";
     });
   });
 
-  lightbox.addEventListener('click', () => {
-    lightbox.style.display = 'none';
-    lightbox.src = '';
+  lightbox.addEventListener("click", () => {
+    lightbox.style.display = "none";
+    lightbox.src = "";
+  });
+
+  // =========================
+  // 👉 NUEVO: HOVER PROYECTOS
+  // =========================
+
+  const projectsHover = document.querySelectorAll(".proyectomiguel");
+
+  projectsHover.forEach(project => {
+    const name = project.dataset.project;
+
+    project.addEventListener("mouseenter", () => {
+      hoverText.textContent = name;
+    });
+
+    project.addEventListener("mouseleave", () => {
+      hoverText.textContent = "";
+    });
   });
 });
