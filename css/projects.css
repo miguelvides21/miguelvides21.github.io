@@ -109,6 +109,7 @@ body::-webkit-scrollbar {
   flex-wrap: wrap;
   padding: 5px;
   align-items: flex-end;
+  row-gap: 10px;
 }
 
 .thumb-item a {
@@ -130,6 +131,7 @@ body::-webkit-scrollbar {
 .thumb-images {
   display: flex;
   flex-wrap: wrap;
+  row-gap: 10px;
 }
 
 .media-thumb {
