@@ -23,6 +23,27 @@ body {
   background-color: #fffff5;
 }
 
+body.project-dark{
+  background-color: #000;
+    color: #fff;
+}
+body.project-dark .headermiguel {
+    background-color: #000;
+    color: #fff;
+}
+body.project-dark .headermiguel a {
+    background-color: #000;
+    color: #fff;
+}
+body.project-dark .nombre-proyecto {
+    background-color: #000;
+    color: #fff;
+}
+
+body.project-dark .contenedor-proyecto {
+    background-color: #000;
+    color: #fff;
+}
 ::selection {
   background: rgba(80, 131, 84, 0);
   color: #60ccfc;
