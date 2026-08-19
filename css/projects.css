@@ -100,7 +100,7 @@ body::-webkit-scrollbar {
 .thumb-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 23px;
+  gap: 15px;
   padding: 0 10px 10px 10px;
 }
 
