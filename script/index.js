@@ -1,125 +1,220 @@
-document.addEventListener("DOMContentLoaded", function() {
-  // === Header / Info ===
+document.addEventListener("DOMContentLoaded", function () {
+
+  // =========================
+  // ELEMENTOS
+  // =========================
+
   const infoBtn = document.getElementById("infoBtn");
   const homeBtn = document.getElementById("homeBtn");
   const info = document.getElementById("infoSection");
   const projects = document.getElementById("projectsSection");
   const header = document.querySelector(".headermiguel");
-
-  // 👉 NUEVO: texto hover debajo de info
   const hoverText = document.getElementById("projectHover");
 
-  let loopActive = true;
-  let isJumping = false;
-  let blockHeight = 0;
 
-  // Duplicar contenido para scroll infinito
-  const originalProjects = projects.innerHTML;
-  projects.innerHTML = originalProjects.repeat(3);
+  // =========================
+  // DUPLICAR PROYECTOS
+  // =========================
 
-  // ⚡ Calcular altura y posicionar scroll al centro
-  window.addEventListener("load", () => {
-    blockHeight = projects.scrollHeight / 3;
-    window.scrollTo({ top: blockHeight, behavior: "instant" });
+  const originalItems = [...projects.children];
+
+  // Creamos 3 bloques
+  originalItems.forEach(item => {
+    projects.appendChild(item.cloneNode(true));
   });
 
-  // === Función scroll infinito sin rebote ===
-  function handleScroll() {
-    if (!loopActive || isJumping || !blockHeight) return;
+  originalItems.forEach(item => {
+    projects.appendChild(item.cloneNode(true));
+  });
 
-    const scrollTop = document.documentElement.scrollTop;
 
-    if (scrollTop >= blockHeight * 2) {
-      jump(blockHeight);
-    } else if (scrollTop <= 0) {
-      jump(blockHeight * 2);
-    }
+  // =========================
+  // LOOP INFINITO
+  // =========================
+
+  let loopReady = false;
+  let blockHeight = 0;
+
+
+  function setupLoop() {
+
+    blockHeight = projects.scrollHeight / 3;
+
+    // Empezamos en el bloque central
+    window.scrollTo({
+      top: blockHeight,
+      behavior: "instant"
+    });
+
+    loopReady = true;
   }
 
-  function jump(position) {
-    isJumping = true;
-    document.body.style.overflow = "hidden";
 
-    window.scrollTo({ top: position, behavior: "instant" });
+  // Esperamos a que carguen todas las imágenes
+  window.addEventListener("load", function () {
 
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        document.body.style.overflow = "";
-        isJumping = false;
+
+        setupLoop();
+
       });
     });
-  }
 
-  // Optimización scroll
-  let ticking = false;
-  window.addEventListener("scroll", () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        handleScroll();
-        ticking = false;
-      });
-      ticking = true;
-    }
   });
 
-  // === Estado inicial header/info ===
+
+  // =========================
+  // SCROLL INFINITO
+  // =========================
+
+  window.addEventListener("scroll", () => {
+
+    if (!loopReady || !blockHeight) return;
+
+    const scrollTop =
+      window.pageYOffset ||
+      document.documentElement.scrollTop;
+
+
+    // =========================
+    // FINAL
+    // =========================
+
+    if (scrollTop >= blockHeight * 2) {
+
+      window.scrollTo({
+        top: scrollTop - blockHeight,
+        behavior: "instant"
+      });
+
+    }
+
+
+    // =========================
+    // PRINCIPIO
+    // =========================
+
+    else if (scrollTop <= 0) {
+
+      window.scrollTo({
+        top: scrollTop + blockHeight,
+        behavior: "instant"
+      });
+
+    }
+
+  });
+
+
+  // =========================
+  // HEADER / INFO
+  // =========================
+
   homeBtn.style.display = "none";
   info.style.display = "none";
 
+
+  // =========================
+  // INFO
+  // =========================
+
   infoBtn.onclick = () => {
-    loopActive = false;
+
     info.style.display = "block";
     projects.style.display = "none";
+
     infoBtn.style.display = "none";
     homeBtn.style.display = "inline-block";
+
     header.classList.add("info-mode");
+
   };
+
+
+  // =========================
+  // BACK
+  // =========================
 
   homeBtn.onclick = () => {
-    loopActive = true;
+
     info.style.display = "none";
     projects.style.display = "flex";
+
     homeBtn.style.display = "none";
     infoBtn.style.display = "inline-block";
+
     header.classList.remove("info-mode");
 
-    window.scrollTo({ top: blockHeight, behavior: "instant" });
+    window.scrollTo({
+      top: blockHeight,
+      behavior: "instant"
+    });
+
   };
 
-  // === LIGHTBOX ===
+
+  // =========================
+  // LIGHTBOX
+  // =========================
+
   const lightbox = document.createElement("img");
+
   lightbox.classList.add("lightbox-img");
   lightbox.style.display = "none";
+
   document.body.appendChild(lightbox);
 
+
   const thumbs = document.querySelectorAll(".media-thumb");
+
+
   thumbs.forEach(img => {
+
     img.addEventListener("click", () => {
+
       lightbox.src = img.src;
       lightbox.style.display = "block";
+
     });
+
   });
+
 
   lightbox.addEventListener("click", () => {
+
     lightbox.style.display = "none";
     lightbox.src = "";
+
   });
 
+
   // =========================
-  // 👉 NUEVO: HOVER PROYECTOS
+  // HOVER PROYECTOS
   // =========================
 
-  const projectsHover = document.querySelectorAll(".proyectomiguel");
+  const projectsHover =
+    document.querySelectorAll(".proyectomiguel");
+
 
   projectsHover.forEach(project => {
+
     const name = project.dataset.project;
 
+
     project.addEventListener("mouseenter", () => {
+
       hoverText.textContent = name;
+
     });
 
+
     project.addEventListener("mouseleave", () => {
+
       hoverText.textContent = "";
+
     });
+
   });
+
 });
