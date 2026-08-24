@@ -36,7 +36,7 @@
 } 
 
 .titulo-proyecto{ 
-  font-size: 30px; 
+  font-size: 20px; 
 } 
 
 .subtitulo-proyecto{ 
@@ -55,9 +55,6 @@
   color: gray; 
 } 
 
-.headermiguel{ 
-  margin-bottom: 0px; 
-} 
 
 .lightbox-img { 
   display: none; 
